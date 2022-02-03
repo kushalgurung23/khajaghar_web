@@ -4,7 +4,7 @@ import 'package:flutter_web/routing/router.dart';
 import 'package:flutter_web/routing/routes.dart';
 
 Navigator localNavigator() => Navigator(
-  key: NavigationController.navigationKey,
-  initialRoute: kProductPageRoute,
-  onGenerateRoute: generateRoute,
-);
+      key: NavigationController.navigationKey,
+      initialRoute: kProductPageRoute,
+      onGenerateRoute: generateRoute,
+    );

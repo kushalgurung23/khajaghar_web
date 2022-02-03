@@ -32,9 +32,9 @@ class MenuController extends ChangeNotifier {
     switch (itemName) {
       case kProductPageRoute:
         return _customIcon(Icons.fastfood, itemName);
-      case kOrderListPageRoute:
+      case kTestOrderListPageRoute:
         return _customIcon(CupertinoIcons.bag, itemName);
-      case kClientsPageRoute:
+      case kOrderListPageRoute:
         return _customIcon(Icons.people_alt_outlined, itemName);
       case kAuthenticationPageRoute:
         return _customIcon(Icons.exit_to_app, itemName);

@@ -6,7 +6,7 @@ import 'package:flutter_web/widgets/small_screen.dart';
 import 'package:flutter_web/widgets/top_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String id = 'order_list';
+  static const String id = 'test_order_list';
 
   const HomeScreen({Key? key}) : super(key: key);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web/controllers/menu_controller.dart';
 import 'package:flutter_web/controllers/navigation_controller.dart';
 import 'package:flutter_web/controllers/order_list_controller.dart';
+import 'package:flutter_web/controllers/test_order_list_controller.dart';
 import 'package:flutter_web/controllers/product_controller.dart';
 import 'package:flutter_web/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,8 +12,9 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => MenuController()),
     ChangeNotifierProvider(create: (context) => NavigationController()),
-    ChangeNotifierProvider(create: (context) => OrderListController()),
+    ChangeNotifierProvider(create: (context) => TestOrderListController()),
     ChangeNotifierProvider(create: (context) => ProductController()),
+    ChangeNotifierProvider(create: (context) => OrderListController()),
   ], child: const MyApp()));
 }
 
@@ -34,9 +36,7 @@ class MyApp extends StatelessWidget {
         }),
         primaryColor: Colors.blue,
       ),
-      routes: {
-        HomeScreen.id: (context) => const HomeScreen()
-      },
+      routes: {HomeScreen.id: (context) => const HomeScreen()},
       initialRoute: HomeScreen.id,
     );
   }

@@ -13,13 +13,7 @@ class ProductController extends ChangeNotifier {
       this.product = product;
     } finally {
       isLoading = false;
-          }
+    }
     notifyListeners();
   }
-
-
-
-
-
-
 }

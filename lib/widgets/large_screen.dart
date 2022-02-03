@@ -9,9 +9,7 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
-            flex: 1,
-            child: SideMenu()),
+        const Expanded(flex: 1, child: SideMenu()),
         Expanded(
           flex: 5,
           child: localNavigator(),
