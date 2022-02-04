@@ -14,7 +14,7 @@ class Order {
   Data data;
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
-        status: json["status"],
+        status: json["status"].toString(),
         data: Data.fromJson(json["data"]),
       );
 
@@ -70,10 +70,10 @@ class OrderClass {
   List<ItemElement> items;
 
   factory OrderClass.fromJson(Map<String, dynamic> json) => OrderClass(
-        status: json["status"],
+        status: json["status"].toString(),
         acceptedAssignment: json["accepted_assignment"],
         archivedAt: json["archivedAt"],
-        id: json["_id"],
+        id: json["_id"].toString(),
         invoice: json["invoice"],
         statusLog: List<StatusLog>.from(
             json["status_log"].map((x) => StatusLog.fromJson(x))),
@@ -81,7 +81,7 @@ class OrderClass {
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
         deliveryAddress: DeliveryAddress.fromJson(json["deliveryAddress"]),
-        placedBy: json["placed_by"],
+        placedBy: json["placed_by"].toString(),
         items: List<ItemElement>.from(
             json["items"].map((x) => ItemElement.fromJson(x))),
       );
@@ -121,11 +121,11 @@ class DeliveryAddress {
 
   factory DeliveryAddress.fromJson(Map<String, dynamic> json) =>
       DeliveryAddress(
-        id: json["_id"],
-        user: json["user"],
-        phone: json["phone"],
-        email: json["email"],
-        address: json["address"],
+        id: json["_id"].toString(),
+        user: json["user"].toString(),
+        phone: json["phone"].toString(),
+        email: json["email"].toString(),
+        address: json["address"].toString(),
         v: json["__v"],
       );
 
@@ -159,9 +159,9 @@ class ItemElement {
   factory ItemElement.fromJson(Map<String, dynamic> json) => ItemElement(
         item: ItemItem.fromJson(json["item"]),
         cooked: json["cooked"],
-        id: json["_id"],
+        id: json["_id"].toString(),
         addons: List<dynamic>.from(json["addons"].map((x) => x)),
-        order: json["order"],
+        order: json["order"].toString(),
         v: json["__v"],
       );
 
@@ -216,10 +216,10 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         usesOfferPrice: json["usesOfferPrice"],
-        id: json["_id"],
-        name: json["name"],
+        id: json["_id"].toString(),
+        name: json["name"].toString(),
         price: json["price"],
-        image: json["image"],
+        image: json["image"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

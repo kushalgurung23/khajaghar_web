@@ -6,6 +6,6 @@ class OrderList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrderTable();
+    return const OrderTable();
   }
 }

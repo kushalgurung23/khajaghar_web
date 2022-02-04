@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web/constants/style.dart';
+import 'package:flutter_web/controllers/order_list_controller.dart';
 import 'package:flutter_web/controllers/product_controller.dart';
 import 'package:flutter_web/widgets/custom_text.dart';
 import 'package:flutter_web/widgets/stateful_wrapper.dart';
@@ -14,6 +15,7 @@ class ProductTable extends StatelessWidget {
     return StatefulWrapper(
       onInit: () {
         Provider.of<ProductController>(context, listen: false).fetchProduct();
+        Provider.of<OrderListController>(context, listen: false).setInvoiceList();
       },
       child: Consumer<ProductController>(builder: (context, data, child) {
         return SingleChildScrollView(
