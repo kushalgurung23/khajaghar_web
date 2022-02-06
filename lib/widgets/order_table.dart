@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_web/constants/style.dart';
 import 'package:flutter_web/controllers/order_list_controller.dart';
+import 'package:flutter_web/helpers/responsiveness.dart';
+import 'package:flutter_web/helpers/size_configuration.dart';
 import 'package:flutter_web/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
@@ -89,46 +92,175 @@ class OrderTable extends StatelessWidget {
             const SizedBox(height: 20),
             data.order == null
                 ? const SizedBox()
-                : Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 20),
-                child: Container(
-                  width: double.infinity,
-                  height: 500,
-                  constraints: const BoxConstraints(
-                    minHeight: 500,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Container(
+                : Flexible(
+                    child: SingleChildScrollView(
+                      physics: const ScrollPhysics(),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                                border: Border.all(color: kLightGrey),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
+                                gradient: const LinearGradient(colors: [
+                                  Colors.green,
+                                  Colors.greenAccent,
+                                  Colors.lightGreenAccent
+                                ]),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Customer Details",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                image: DecorationImage(
-                                    image: NetworkImage(data.order!.data
-                                        .order.items[0].item.product.image),
-                                    fit: BoxFit.fill)),
-                          )),
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  bottomRight: Radius.circular(20),
-                                ),
-                                border: Border.all(color: kLightGrey),
-                                color: kLight.withOpacity(0.1)
+                                Text("Phone: " +
+                                    data.order!.data.order.deliveryAddress
+                                        .phone),
+                                Text("Email: " +
+                                    data.order!.data.order.deliveryAddress
+                                        .email),
+                                Text("Address: " +
+                                    data.order!.data.order.deliveryAddress
+                                        .address),
+                              ],
                             ),
-                          )),
-                    ],
-                  ),
-                ),
+                          ),
+                          ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: data.order!.data.order.items.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      left: ResponsiveWidget.isSmallScreen(
+                                                  context) ||
+                                              ResponsiveWidget.isCustomScreen(
+                                                  context)
+                                          ? 100
+                                          : 200.0,
+                                      right: ResponsiveWidget.isSmallScreen(
+                                                  context) ||
+                                              ResponsiveWidget.isCustomScreen(
+                                                  context)
+                                          ? 100
+                                          : 200.0,
+                                      bottom: 20),
+                                  child: SizedBox(
+                                    height:
+                                        ResponsiveWidget.isSmallScreen(context)
+                                            ? 220
+                                            : 270,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  bottomLeft:
+                                                      Radius.circular(20),
+                                                ),
+                                                image: DecorationImage(
+                                                    image: data
+                                                            .order!
+                                                            .data
+                                                            .order
+                                                            .items[index]
+                                                            .item
+                                                            .product
+                                                            .image
+                                                            .isNotEmpty
+                                                        ? NetworkImage(data
+                                                            .order!
+                                                            .data
+                                                            .order
+                                                            .items[index]
+                                                            .item
+                                                            .product
+                                                            .image)
+                                                        : const NetworkImage(
+                                                            "http://www.newdesignfile.com/postpic/2015/02/not-available-icon_68023.jpg"),
+                                                    fit: BoxFit.fill)),
+                                          ),
+                                        ),
+                                        Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20),
+                                                    bottomRight:
+                                                        Radius.circular(20),
+                                                  ),
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.green,
+                                                        Colors.greenAccent,
+                                                        Colors.lightGreenAccent
+                                                      ])),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text("Name: " +
+                                                      data
+                                                          .order!
+                                                          .data
+                                                          .order
+                                                          .items[index]
+                                                          .item
+                                                          .product
+                                                          .name),
+                                                  Text("Quantity: " +
+                                                      data
+                                                          .order!
+                                                          .data
+                                                          .order
+                                                          .items[index]
+                                                          .item
+                                                          .quantity
+                                                          .toString()),
+                                                  Text("Unit Price: Rs. " +
+                                                      data
+                                                          .order!
+                                                          .data
+                                                          .order
+                                                          .items[index]
+                                                          .item
+                                                          .unitPrice
+                                                          .toString()),
+                                                  Text("Line Total: Rs. " +
+                                                      (data
+                                                                  .order!
+                                                                  .data
+                                                                  .order
+                                                                  .items[index]
+                                                                  .item
+                                                                  .unitPrice *
+                                                              data
+                                                                  .order!
+                                                                  .data
+                                                                  .order
+                                                                  .items[index]
+                                                                  .item
+                                                                  .quantity)
+                                                          .toString()),
+                                                ],
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
                   )
           ],
         );

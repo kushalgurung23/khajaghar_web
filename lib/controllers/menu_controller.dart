@@ -35,7 +35,7 @@ class MenuController extends ChangeNotifier {
       case kTestOrderListPageRoute:
         return _customIcon(CupertinoIcons.bag, itemName);
       case kOrderListPageRoute:
-        return _customIcon(Icons.people_alt_outlined, itemName);
+        return _customIcon(Icons.note_alt, itemName);
       case kAuthenticationPageRoute:
         return _customIcon(Icons.exit_to_app, itemName);
       default:
