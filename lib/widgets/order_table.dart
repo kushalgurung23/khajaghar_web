@@ -146,10 +146,7 @@ class OrderTable extends StatelessWidget {
                                           : 200.0,
                                       bottom: 20),
                                   child: SizedBox(
-                                    height:
-                                        ResponsiveWidget.isSmallScreen(context)
-                                            ? 220
-                                            : ResponsiveWidget.isSmallScreen(context)? 260 : 370,
+                                    height: data.getSizedBoxHeight(context),
                                     child: Row(
                                       children: [
                                         Expanded(
