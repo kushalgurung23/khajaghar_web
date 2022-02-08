@@ -132,24 +132,26 @@ class OrderTable extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: EdgeInsets.only(
-                                      left: ResponsiveWidget.isSmallScreen(
+                                      left: ResponsiveWidget.isCustomScreen(
                                                   context) ||
-                                              ResponsiveWidget.isCustomScreen(
+                                              ResponsiveWidget.isSmallScreen(
                                                   context)
-                                          ? 100
-                                          : 200.0,
-                                      right: ResponsiveWidget.isSmallScreen(
+                                          ? 200
+                                          : 200,
+                                      right: ResponsiveWidget.isCustomScreen(
                                                   context) ||
-                                              ResponsiveWidget.isCustomScreen(
+                                              ResponsiveWidget.isSmallScreen(
                                                   context)
-                                          ? 100
-                                          : 200.0,
+                                          ? 200
+                                          : 200,
                                       bottom: 20),
                                   child: SizedBox(
-                                    height:
-                                        ResponsiveWidget.isSmallScreen(context)
-                                            ? 220
-                                            : ResponsiveWidget.isSmallScreen(context)? 260 : 370,
+                                    height: ResponsiveWidget.isCustomScreen(
+                                                context) ||
+                                            ResponsiveWidget.isSmallScreen(
+                                                context)
+                                        ? 250
+                                        : 380,
                                     child: Row(
                                       children: [
                                         Expanded(
