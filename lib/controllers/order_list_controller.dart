@@ -19,27 +19,11 @@ class OrderListController extends ChangeNotifier {
   }
 
   String? selectedValue;
+  double? sizedBoxHeight;
 
   void changeSelectedValue({required String newValue}) {
     selectedValue = newValue;
     notifyListeners();
-  }
-
-  double getSizedBoxHeight(BuildContext context) {
-    try {
-      if(ResponsiveWidget.isSmallScreen(context)) {
-        return 220;
-      }
-      else if(ResponsiveWidget.isCustomScreen(context) || ResponsiveWidget.isMediumScreen(context)) {
-        return 260;
-      }
-      else {
-        return 370;
-      }
-    }
-    finally{
-      notifyListeners();
-    }
   }
 
   late List invoiceNumbers;
