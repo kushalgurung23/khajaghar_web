@@ -7,7 +7,7 @@ import 'package:flutter_web/controllers/product_controller.dart';
 import 'package:flutter_web/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-//okay
+
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => MenuController()),
@@ -17,7 +17,6 @@ void main() {
     ChangeNotifierProvider(create: (context) => OrderListController()),
   ], child: const MyApp()));
 }
-// cha ta
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
