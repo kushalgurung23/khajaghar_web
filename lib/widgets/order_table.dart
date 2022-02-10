@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_web/constants/style.dart';
 import 'package:flutter_web/controllers/order_list_controller.dart';
-import 'package:flutter_web/helpers/responsiveness.dart';
-import 'package:flutter_web/helpers/size_configuration.dart';
 import 'package:flutter_web/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
@@ -93,177 +90,179 @@ class OrderTable extends StatelessWidget {
             data.order == null
                 ? const SizedBox()
                 : Flexible(
-                    child: SingleChildScrollView(
-                      physics: const ScrollPhysics(),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [
-                                  Colors.green,
-                                  Colors.greenAccent,
-                                  Colors.lightGreenAccent
-                                ]),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Customer Details",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text("Phone: " +
-                                    data.order!.data.order.deliveryAddress
-                                        .phone),
-                                Text("Email: " +
-                                    data.order!.data.order.deliveryAddress
-                                        .email),
-                                Text("Address: " +
-                                    data.order!.data.order.deliveryAddress
-                                        .address),
-                              ],
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              color: Colors.black87,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Customer Details",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              Text(
+                                  "Phone: " +
+                                      data.order!.data.order.deliveryAddress
+                                          .phone,
+                                  style: const TextStyle(color: Colors.white)),
+                              Text(
+                                  "Email: " +
+                                      data.order!.data.order.deliveryAddress
+                                          .email,
+                                  style: const TextStyle(color: Colors.white)),
+                              Text(
+                                  "Address: " +
+                                      data.order!.data.order.deliveryAddress
+                                          .address,
+                                  style: const TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: DataTable2(
+                                  dataRowHeight: 200,
+                                  headingRowColor: MaterialStateProperty.all(
+                                      kLightGrey.withOpacity(0.5)),
+                                  headingTextStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  columnSpacing: 12,
+                                  horizontalMargin: 0,
+                                  minWidth: 600,
+                                  columns: const [
+                                    DataColumn2(
+                                      label: Text(''),
+                                      size: ColumnSize.M,
+                                    ),
+                                    DataColumn2(
+                                      label: Text('Name'),
+                                      size: ColumnSize.M,
+                                    ),
+                                    DataColumn2(
+                                      label: Text('Quantity'),
+                                      numeric: true,
+                                      size: ColumnSize.M,
+                                    ),
+                                    DataColumn2(
+                                      label: Text('Unit Price'),
+                                      numeric: true,
+                                      size: ColumnSize.M,
+                                    ),
+                                    DataColumn2(
+                                      label: Text('Line Total     '),
+                                      numeric: true,
+                                      size: ColumnSize.M,
+                                    ),
+                                  ],
+                                  rows: List<DataRow>.generate(
+                                      data.order!.data.order.items.length,
+                                      (index) => DataRow(cells: [
+                                            DataCell(
+                                              data
+                                                      .order!
+                                                      .data
+                                                      .order
+                                                      .items[index]
+                                                      .item
+                                                      .product
+                                                      .image
+                                                      .isNotEmpty
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20),
+                                                      child: Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            image: DecorationImage(
+                                                                image: NetworkImage(
+                                                                    data
+                                                                        .order!
+                                                                        .data
+                                                                        .order
+                                                                        .items[
+                                                                            index]
+                                                                        .item
+                                                                        .product
+                                                                        .image),
+                                                                fit: BoxFit
+                                                                    .fill)),
+                                                      ),
+                                                    )
+                                                  : Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20),
+                                                      child: Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            image: const DecorationImage(
+                                                                image: AssetImage(
+                                                                    "assets/images/NoImage.png"),
+                                                                fit: BoxFit
+                                                                    .fill)),
+                                                      ),
+                                                    ),
+                                            ),
+                                            DataCell(Text(data
+                                                .order!
+                                                .data
+                                                .order
+                                                .items[index]
+                                                .item
+                                                .product
+                                                .name)),
+                                            DataCell(Text(data.order!.data.order
+                                                .items[index].item.quantity
+                                                .toString())),
+                                            DataCell(
+                                              Text(data.order!.data.order
+                                                  .items[index].item.unitPrice
+                                                  .toString()),
+                                            ),
+                                            DataCell(Text((data
+                                                            .order!
+                                                            .data
+                                                            .order
+                                                            .items[index]
+                                                            .item
+                                                            .unitPrice *
+                                                        data
+                                                            .order!
+                                                            .data
+                                                            .order
+                                                            .items[index]
+                                                            .item
+                                                            .quantity)
+                                                    .toString() +
+                                                "     ")),
+                                          ]))),
                             ),
                           ),
-                          ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: data.order!.data.order.items.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      left: ResponsiveWidget.isCustomScreen(
-                                                  context) ||
-                                              ResponsiveWidget.isSmallScreen(
-                                                  context)
-                                          ? 200
-                                          : 200,
-                                      right: ResponsiveWidget.isCustomScreen(
-                                                  context) ||
-                                              ResponsiveWidget.isSmallScreen(
-                                                  context)
-                                          ? 200
-                                          : 200,
-                                      bottom: 20),
-                                  child: SizedBox(
-                                    height: ResponsiveWidget.isCustomScreen(
-                                                context) ||
-                                            ResponsiveWidget.isSmallScreen(
-                                                context)
-                                        ? 250
-                                        : 380,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(20),
-                                                  bottomLeft:
-                                                      Radius.circular(20),
-                                                ),
-                                                image: DecorationImage(
-                                                    image: data
-                                                            .order!
-                                                            .data
-                                                            .order
-                                                            .items[index]
-                                                            .item
-                                                            .product
-                                                            .image
-                                                            .isNotEmpty
-                                                        ? NetworkImage(data
-                                                            .order!
-                                                            .data
-                                                            .order
-                                                            .items[index]
-                                                            .item
-                                                            .product
-                                                            .image)
-                                                        : const NetworkImage(
-                                                            "http://www.newdesignfile.com/postpic/2015/02/not-available-icon_68023.jpg"),
-                                                    fit: BoxFit.fill)),
-                                          ),
-                                        ),
-                                        Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(20),
-                                                  ),
-                                                  gradient: LinearGradient(
-                                                      colors: [
-                                                        Colors.green,
-                                                        Colors.greenAccent,
-                                                        Colors.lightGreenAccent
-                                                      ])),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Text("Name: " +
-                                                      data
-                                                          .order!
-                                                          .data
-                                                          .order
-                                                          .items[index]
-                                                          .item
-                                                          .product
-                                                          .name),
-                                                  Text("Quantity: " +
-                                                      data
-                                                          .order!
-                                                          .data
-                                                          .order
-                                                          .items[index]
-                                                          .item
-                                                          .quantity
-                                                          .toString()),
-                                                  Text("Unit Price: Rs. " +
-                                                      data
-                                                          .order!
-                                                          .data
-                                                          .order
-                                                          .items[index]
-                                                          .item
-                                                          .unitPrice
-                                                          .toString()),
-                                                  Text("Line Total: Rs. " +
-                                                      (data
-                                                                  .order!
-                                                                  .data
-                                                                  .order
-                                                                  .items[index]
-                                                                  .item
-                                                                  .unitPrice *
-                                                              data
-                                                                  .order!
-                                                                  .data
-                                                                  .order
-                                                                  .items[index]
-                                                                  .item
-                                                                  .quantity)
-                                                          .toString()),
-                                                ],
-                                              ),
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )
+                  ),
           ],
         );
       },
