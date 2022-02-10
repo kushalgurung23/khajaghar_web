@@ -7,8 +7,7 @@ import 'package:flutter_web/controllers/product_controller.dart';
 import 'package:flutter_web/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-// conflict solved..... done
-//hello
+
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => MenuController()),
